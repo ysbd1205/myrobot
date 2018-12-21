@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="vs060">
+    <!-- vs060 -->
+    <xacro:include filename="$(find denso_robot_descriptions)/vs060_description/vs060.urdf" />
+    <xacro:property name="Pi" value="3.14159265" />
+    <link name="jig_link">
+   		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0" />
+			<geometry>
+                <mesh filename="package://myrobot_descriptions/model/jig.stl" scale="1 1 1" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://myrobot_descriptions/model/jig.stl" scale="1 1 1" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="1" />
+			<origin rpy="0.000000 0.000000 0.000000" xyz="0.000000 0.000000 0.000000" />
+			<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+		</inertial>
+    </link>
+    <joint name="joint_jig" type="fixed">
+		<parent link="J6" />
+		<child link="jig_link" />
+		<origin rpy="0.000000 0.000000 0.000000" xyz="0.000000 0.000000 0.000000" />
+	</joint>
+    <link name="loadcell_link">
+   		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0" />
+			<geometry>
+                <mesh filename="package://myrobot_descriptions/model/loadcell.stl" scale="1 1 1" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://myrobot_descriptions/model/loadcell.stl" scale="1 1 1" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="1" />
+			<origin rpy="0.000000 0.000000 0.000000" xyz="0.000000 0.000000 0.000000" />
+			<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+		</inertial>
+    </link>
+    <joint name="joint_loadcell" type="fixed">
+		<parent link="jig_link" />
+		<child link="loadcell_link" />
+		<origin rpy="0.000000 0.000000 0.000000" xyz="0.000000 0.000000 0.03570" />
+	</joint>
+    <link name="bucket_link">
+   		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0" />
+			<geometry>
+                <mesh filename="package://myrobot_descriptions/model/bucket.stl" scale="1 1 1" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://myrobot_descriptions/model/bucket.stl" scale="1 1 1" />
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="1" />
+			<origin rpy="0.000000 0.000000 0.000000" xyz="0.000000 0.000000 0.000000" />
+			<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+		</inertial>
+    </link>
+    <joint name="joint_bucket" type="fixed">
+		<parent link="loadcell_link" />
+		<child link="bucket_link" />
+        <origin rpy="0.000000 0.000000 ${Pi/2}" xyz="0.000000 0.000000 0.000000" />
+	</joint>
+</robot>
